@@ -17,15 +17,12 @@ def csvonehot(inputfile, delim1="\t", delim2=";"):
         delim2=delim2, 
         value_type="str"
         )
-    
-    print(myhash_before)
 
     # get the union of values
     value_set     = set()
     for key in myhash_before.keys():
         value_set = value_set | set(myhash_before[key])
     value_list    = list(value_set)
-    print(len(value_list))
 
     # 
     myhash_after  = dict()
