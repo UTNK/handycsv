@@ -5,10 +5,11 @@
 import module.mylink as mylink
 from statistics import mean, median, mode
 import argparse
+import sys
 ######################
 
 # func
-def csvonehot(inputfile, delim1="\t", delim2=";"):
+def csvonehot(inputfile, delim1="\t", delim2=";", value_list_file=None):
 
     # read a file
     myhash_before = mylink.make_hash2(
@@ -41,6 +42,13 @@ def csvonehot(inputfile, delim1="\t", delim2=";"):
         delim=[delim1,delim2], 
         value_type="list"
         )
+    
+    if(value_list_file!=None):
+        for value in value_list:
+            print(
+                value, 
+                file=value_list_file
+                )
 
 # interface
 if __name__ == "__main__":
@@ -70,13 +78,26 @@ if __name__ == "__main__":
         help="delimitter among values",
         default="\t"
         )
+    
+    parser.add_argument(
+        "--delim2",
+        help="delimitter among values",
+        default="\t"
+        )
+    
+    parser.add_argument(
+        "--valuefile",
+        help="file path to export the list of values",
+        default="\t"
+        )
         
     # parse arguments
     args = parser.parse_args()
 
     # execute main_function()
     csvonehot(  
-        inputfile = args.input ,
-        delim1    = args.delim1,
-        delim2    = args.delim2
+        inputfile = args.input          ,
+        delim1    = args.delim1         ,
+        delim2    = args.delim2         ,
+        value_list_file = args.valuefile, 
     )
