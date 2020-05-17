@@ -25,7 +25,7 @@ def csvonehot(inputfile, delim1="\t", delim2=";"):
     value_list    = list(value_set)
 
     # 
-    myhash_after  = set()
+    myhash_after  = dict()
     for key in myhash_before.keys():
         value_set_of_the_key = set(myhash_before[key])
         one_hot_vector       = [0] * len(value_list)
