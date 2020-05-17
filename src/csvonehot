@@ -44,11 +44,12 @@ def csvonehot(inputfile, delim1="\t", delim2=";", value_list_file=None):
         )
     
     if(value_list_file!=None):
-        for value in value_list:
-            print(
-                value, 
-                file=value_list_file
-                )
+        with open(value_list_file,'w') as ost:
+            for value in value_list:
+                print(
+                    value, 
+                    file=ost
+                    )
 
 # interface
 if __name__ == "__main__":
