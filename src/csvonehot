@@ -53,7 +53,7 @@ def csvonehot(inputfile, delim1="\t", delim2=";", value_list_file=None):
 
 # interface
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='csvrep', add_help=True)
+    parser = argparse.ArgumentParser(description='csvonehot', add_help=True)
     
     parser.add_argument(
         "-v", "--version",
