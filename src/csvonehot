@@ -23,6 +23,7 @@ def csvonehot(inputfile, delim1="\t", delim2=";"):
     for key in myhash_before.keys():
         value_set = value_set | set(myhash_before[key])
     value_list    = list(value_set)
+    print(len(value_list))
 
     # 
     myhash_after  = dict()
