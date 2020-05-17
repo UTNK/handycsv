@@ -80,15 +80,9 @@ if __name__ == "__main__":
         )
     
     parser.add_argument(
-        "--delim2",
-        help="delimitter among values",
-        default="\t"
-        )
-    
-    parser.add_argument(
         "--valuefile",
         help="file path to export the list of values",
-        default="\t"
+        default=None
         )
         
     # parse arguments
