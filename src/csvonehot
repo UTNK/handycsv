@@ -18,6 +18,8 @@ def csvonehot(inputfile, delim1="\t", delim2=";"):
         value_type="str"
         )
     
+    print(myhash_before)
+
     # get the union of values
     value_set     = set()
     for key in myhash_before.keys():
