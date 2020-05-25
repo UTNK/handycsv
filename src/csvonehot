@@ -9,7 +9,7 @@ import sys
 ######################
 
 # func
-def csvonehot(inputfile, delim1="\t", delim2=";", value_list_file=None):
+def csvonehot(inputfile, delim1="\t", delim2=";", value_list_file=None, header=False):
 
     # read a file
     myhash_before = mylink.make_hash2(
@@ -38,6 +38,12 @@ def csvonehot(inputfile, delim1="\t", delim2=";", value_list_file=None):
                 one_hot_vector[i] = 0
         myhash_after[key]         = one_hot_vector
     
+    if(header):
+        print("key", end=delim1)
+        for value in value_list:
+            print(value, end=delim2)
+        print("")
+
     mylink.export_hash(
         myhash_after, 
         delim=[delim1,delim2], 
@@ -86,6 +92,12 @@ if __name__ == "__main__":
         help="file path to export the list of values",
         default=None
         )
+    
+    parser.add_argument(
+        "--header",
+        help="attach header row in output",
+        action='store_true',
+        )
         
     # parse arguments
     args = parser.parse_args()
@@ -96,4 +108,5 @@ if __name__ == "__main__":
         delim1    = args.delim1         ,
         delim2    = args.delim2         ,
         value_list_file = args.valuefile, 
+        header    = args.header
     )
