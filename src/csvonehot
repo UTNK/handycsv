@@ -22,7 +22,7 @@ def csvonehot(inputfile, delim1="\t", delim2=";", value_list_file=None, header=F
     # get the union of values
     value_set     = set()
     for key in myhash_before.keys():
-        value_set = value_set | set(myhash_before[key])
+        value_set = value_set | set(myhash_before[key]) - {""}
     value_list    = list(value_set)
     value_list.sort()
 
