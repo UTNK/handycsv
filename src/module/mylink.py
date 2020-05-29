@@ -31,6 +31,7 @@ def make_hash2(txtfile,delim1="\t",delim2="\t",value_type="str"): # key -> [valu
                 values    = line_list[1:]
             else              : # key<del1>value1<del2>value2<del2>...
                 key       = line.split('\n')[0].split(delim1)[0]
+                print(line)
                 values    = line.split('\n')[0].split(delim1)[1].split(delim2)
             
             # modify type when needed
