@@ -21,6 +21,7 @@ def make_hash1(txtfile,reverse=False,delim="\t"): # key -> value
 
 def make_hash2(txtfile,delim1="\t",delim2="\t",value_type="str"): # key -> [value1, value2, ...]
     dic={}
+    
     with open(txtfile,'r') as handle:
         for line in handle:
             
