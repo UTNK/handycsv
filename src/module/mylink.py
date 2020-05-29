@@ -2,7 +2,7 @@ def make_list(txtfile, delim="\t", column=0):
     names=[]
     with open(txtfile, 'r') as handle:
         for line in handle:
-            names.append(line.split(delim)[column])
+            names.append(line.split("\n")[0].split(delim)[column])
     return names
 
 def make_hash1(txtfile,reverse=False,delim="\t"): # key -> value
