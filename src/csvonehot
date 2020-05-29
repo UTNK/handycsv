@@ -28,6 +28,7 @@ def csvonehot(
 
     if ( value_list_file != None ):
         value_list = mylink.make_list(value_list_file)
+        print(value_list)
     else:
         # get the union of values
         value_set     = set()
