@@ -5,15 +5,22 @@
 import module.mylink as mylink
 from statistics import mean, median, mode
 import argparse
+import random
 ######################
 
 # func
-def csvrep(inputfile, represent = "mean", key_column=1, value_column=2, delim="\t"):
+def csvrep(inputfile, represent, key_column=1, value_column=2, delim="\t"):
     
     key_column   -= 1
     value_column -= 1
 
-    myhash_before = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="float")
+    if (represent == "random"  ):
+        myhash_before = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="str")
+    
+    else:
+        myhash_before = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="float")
+    
+    
     myhash_after  = {}
     
     for key in myhash_before.keys():
@@ -22,10 +29,14 @@ def csvrep(inputfile, represent = "mean", key_column=1, value_column=2, delim="\
             myhash_after[key] = mean(myhash_before[key])
         
         elif (represent == "median"):
+            
             myhash_after[key] = median(myhash_before[key])
         
         elif (represent == "mode"  ):
             myhash_after[key] = mode(myhash_before[key])
+        
+        elif (represent == "random"  ):
+            myhash_after[key] = random.choice(myhash_before[key])
     
     mylink.export_hash(myhash_after, delim=delim)
 
@@ -48,7 +59,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "-r", "--represent",
-        help="Choose which value to calculate: \'mean\', \'median\', or \'mode\'",
+        help="Choose which value to calculate: \'mean\', \'median\', \'mode\', or 'random'",
         default="mean"
         )
     
