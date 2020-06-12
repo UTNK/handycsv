@@ -9,8 +9,10 @@ import random
 ######################
 
 # func
-def csvrep(inputfile, represent, key_column=1, value_column=2, delim="\t"):
-    
+def csvrep(inputfile, represent, key_column, value_column, delim,seed):
+
+    random.seed(seed)
+
     key_column   -= 1
     value_column -= 1
 
@@ -75,6 +77,12 @@ if __name__ == "__main__":
         default="\t"
         )
     
+    parser.add_argument(
+        "-s", "--seed",
+        help="Random seed (Integer)",
+        default=0
+        )
+    
     # parse arguments
     args = parser.parse_args()
 
@@ -83,4 +91,6 @@ if __name__ == "__main__":
             represent    = args.represent                , 
             key_column   = int(args.column.split(",")[0]), 
             value_column = int(args.column.split(",")[1]), 
-            delim        = args.delimitter               )
+            delim        = args.delimitter               ,
+            seed         = args.seed
+            )
