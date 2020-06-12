@@ -56,7 +56,6 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
     with open(txtfile,'r') as handle:
         for line in handle:
             line_list = line.split('\n')[0].split(delim)
-            print(line_list)
             key       = line_list[key_column]
             value     = line_list[value_column]
             if (value_type != "str"):
