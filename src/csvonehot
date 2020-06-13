@@ -58,8 +58,8 @@ def csvonehot(
         print("")
 
     for key in key_list:
+        print(key, end="\t")
         for i, value in enumerate(myhash_after[key]):
-            print(key, end="\t")
             if(i != len(myhash_after)-1):
                 print(value, end="\t")
             else:
