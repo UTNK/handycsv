@@ -54,11 +54,12 @@ def csvonehot(
             print(value, end=delim2)
         print("")
 
-    mylink.export_hash(
-        myhash_after, 
-        delim=[delim1,delim2], 
-        value_type="list"
-        )
+    for key in myhash_before.keys():
+        for i, value in enumerate(myhash_after[key]):
+            if(i != len(myhash_after)-1):
+                print(value, end="\t")
+            else:
+                print(value, end="\n")
     
     if(value_out_file!=None):
         with open(value_out_file,'w') as ost:
