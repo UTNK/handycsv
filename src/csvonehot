@@ -13,8 +13,8 @@ def csvonehot(
     inputfile, 
     delim1, 
     delim2, 
-    value_list_file, 
-    save_value_list, 
+    value_in_file, 
+    value_out_file, 
     header=False
     ):
 
@@ -26,8 +26,8 @@ def csvonehot(
         value_type="str"
         )
 
-    if ( value_list_file != None ):
-        value_list = mylink.make_list(value_list_file)
+    if ( value_in_file != None ):
+        value_list = mylink.make_list(value_in_file)
     else:
         # get the union of values
         value_set     = set()
@@ -60,8 +60,8 @@ def csvonehot(
         value_type="list"
         )
     
-    if(value_list_file!=None):
-        with open(value_list_file,'w') as ost:
+    if(value_out_file!=None):
+        with open(value_out_file,'w') as ost:
             for value in value_list:
                 print(
                     value, 
@@ -98,13 +98,13 @@ if __name__ == "__main__":
         )
     
     parser.add_argument(
-        "--value",
+        "--value_in",
         help="file path of selected value list",
         default=None
         )
     
     parser.add_argument(
-        "--col",
+        "--value_out",
         help="file path to export the list of values",
         default=None
         )
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         inputfile = args.input          ,
         delim1    = args.delim1         ,
         delim2    = args.delim2         ,
-        value_list_file = args.value    , 
-        save_value_list = args.col      , 
+        value_in_file  = args.value_in , 
+        value_out_file = args.value_out, 
         header    = args.header
     )
