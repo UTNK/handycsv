@@ -98,13 +98,13 @@ if __name__ == "__main__":
         )
     
     parser.add_argument(
-        "--value_in",
+        "--select",
         help="file path of selected value list",
         default=None
         )
     
     parser.add_argument(
-        "--value_out",
+        "--export",
         help="file path to export the list of values",
         default=None
         )
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         inputfile = args.input          ,
         delim1    = args.delim1         ,
         delim2    = args.delim2         ,
-        value_in_file  = args.value_in , 
-        value_out_file = args.value_out, 
+        value_in_file  = args.select , 
+        value_out_file = args.export, 
         header    = args.header
     )
