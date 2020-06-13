@@ -20,7 +20,7 @@ def csvonehot(
 
     # read a file
     
-    mylink.make_list(inputfile, delim=delim1)
+    key_list = mylink.make_list(inputfile, delim=delim1)
 
     myhash_before = mylink.make_hash2(
         inputfile, 
@@ -57,7 +57,7 @@ def csvonehot(
             print(value, end=delim2)
         print("")
 
-    for key in myhash_before.keys():
+    for key in key_list:
         for i, value in enumerate(myhash_after[key]):
             print(key, end="\t")
             if(i != len(myhash_after)-1):
