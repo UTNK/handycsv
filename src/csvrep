@@ -39,6 +39,9 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
         
         elif (represent == "random"  ):
             myhash_after[key] = random.choice(myhash_before[key])
+        
+        elif (represent == "sum"  ):
+            myhash_after[key] = sum(myhash_before[key])
     
     mylink.export_hash(myhash_after, delim=delim)
 
