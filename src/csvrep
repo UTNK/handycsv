@@ -64,7 +64,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "-r", "--represent",
-        help="Choose which value to calculate: \'mean\', \'median\', \'mode\', or 'random'",
+        help="Choose which value to calculate: \'mean\', \'median\', \'mode\', 'sum', or 'random'",
         default="mean"
         )
     
