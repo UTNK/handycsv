@@ -55,6 +55,7 @@ def make_hash2(txtfile,delim1="\t",delim2="\t",value_type="str"): # key -> [valu
 
 def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value_type="str"): # key -> [value1, value2, ...]
     dic={}
+    key_list=[]
 
     if (txtfile == None):
         handle = sys.stdin
@@ -64,7 +65,10 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
     if (True):
         for line in handle:
             line_list = line.split('\n')[0].split(delim)
+            
             key       = line_list[key_column]
+            key_list.append(key)
+
             value     = line_list[value_column]
             if (value_type != "str"):
                 if  (value_type == "int"  ):
