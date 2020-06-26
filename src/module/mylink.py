@@ -53,7 +53,7 @@ def make_hash2(txtfile,delim1="\t",delim2="\t",value_type="str"): # key -> [valu
 
     return dic
 
-def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value_type="str"): # key -> [value1, value2, ...]
+def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value_type="str", out_key=False): # key -> [value1, value2, ...]
     dic={}
     key_list=[]
 
@@ -82,7 +82,10 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
     
     handle.close()
 
-    return dic, key_list
+    if(out_key):
+        return dic, key_list
+    else:
+        return dic
 
 def connect_dict(dic1, dic2):
     dic={}

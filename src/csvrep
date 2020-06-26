@@ -17,11 +17,10 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
     value_column -= 1
 
     if (represent == "random"  ):
-        myhash_before, key_list = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="str")
+        myhash_before, key_list = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="str", out_key=True)
     
     else:
-        myhash_before, key_list = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="float")
-    
+        myhash_before, key_list = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="float", out_key=True)
     
     myhash_after  = {}
     
