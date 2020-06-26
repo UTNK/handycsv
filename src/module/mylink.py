@@ -82,7 +82,7 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
     
     handle.close()
 
-    return dic
+    return dic, key_list
 
 def connect_dict(dic1, dic2):
     dic={}
