@@ -1,3 +1,5 @@
+import sys 
+
 def make_list(txtfile, delim="\t", column=0):
     names=[]
     with open(txtfile, 'r') as handle:
@@ -53,7 +55,13 @@ def make_hash2(txtfile,delim1="\t",delim2="\t",value_type="str"): # key -> [valu
 
 def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value_type="str"): # key -> [value1, value2, ...]
     dic={}
-    with open(txtfile,'r') as handle:
+
+    if (txtfile == None):
+        handle = sys.stdin
+    else:
+        handle = open(txtfile, 'r')
+
+    if (True):
         for line in handle:
             line_list = line.split('\n')[0].split(delim)
             key       = line_list[key_column]
@@ -67,6 +75,9 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
                 dic[key].append(value)
             except:
                 dic[key]=[value]
+    
+    handle.close()
+
     return dic
 
 def connect_dict(dic1, dic2):
