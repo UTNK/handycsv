@@ -121,13 +121,16 @@ def make_set_of_lists(pair_list_file, keys_of_interest_file=None, values_of_inte
     
     return list_of_set
 
-def export_hash(myhash, delim="\t", value_type=None):
+def export_hash(myhash, delim="\t", value_type=None, key_list=None):
+    if(key_list == None):
+        key_list = sorted(myhash.keys())
+
     if(value_type == "list"):
-        for key in sorted(myhash.keys()):
+        for key in key_list:
             print(str(key) + delim[0], end="")
             for value in myhash[key]:
                 print(str(value) + delim[1], end="")
             print("")
     else:
-        for key in sorted(myhash.keys()):
+        for key in key_list:
             print(str(key) + delim + str(myhash[key]))

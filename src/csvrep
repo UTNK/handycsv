@@ -16,6 +16,8 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
     key_column   -= 1
     value_column -= 1
 
+    key_list = mylink.make_list(inputfile, delim=delim, column=key_column)
+
     if (represent == "random"  ):
         myhash_before = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="str")
     
@@ -43,7 +45,7 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
         elif (represent == "sum"  ):
             myhash_after[key] = sum(myhash_before[key])
     
-    mylink.export_hash(myhash_after, delim=delim)
+    mylink.export_hash(myhash_after, delim=delim, key_list=key_list)
 
 # interface
 if __name__ == "__main__":
