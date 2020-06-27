@@ -41,6 +41,9 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
         
         elif (represent == "sum"  ):
             myhash_after[key] = sum(myhash_before[key])
+        
+        elif (represent == "max"  ):
+            myhash_after[key] = max(myhash_before[key])
     
     mylink.export_hash(myhash_after, delim=delim, key_list=key_list)
 
