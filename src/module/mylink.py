@@ -67,7 +67,6 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
             line_list = line.split('\n')[0].split(delim)
             
             key       = line_list[key_column]
-            key_list.append(key)
 
             value     = line_list[value_column]
             if (value_type != "str"):
@@ -78,6 +77,7 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
             try:
                 dic[key].append(value)
             except:
+                key_list.append(key)
                 dic[key]=[value]
     
     handle.close()
