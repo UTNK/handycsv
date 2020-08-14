@@ -17,7 +17,7 @@ def csvtranspose(inputfile, delim="\t"):
             table_content.append(line.split("\n")[0].split(delim))
     for j in range(len(table_content[0])):
         for i in range(len(table_content)):
-            if (j == len(table_content[0]) - 1):
+            if (i == len(table_content) - 1):
                 print(table_content[i][j], end="\n")
             else:
                 print(table_content[i][j], end=delim)
