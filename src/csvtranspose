@@ -9,7 +9,7 @@ import random
 ######################
 
 # func
-def csvtranspose(inputfile, delim):
+def csvtranspose(inputfile, delim="\t"):
 
     table_content=[]
     with open(inputfile, 'r') as handle:
@@ -20,7 +20,7 @@ def csvtranspose(inputfile, delim):
             if (j == len(table_content[0]) - 1):
                 print(table_content[i][j], end="\n")
             else:
-                print(table_content[i][j], end="\t")
+                print(table_content[i][j], end=delim)
 
 # interface
 if __name__ == "__main__":
