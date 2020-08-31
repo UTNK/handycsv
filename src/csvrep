@@ -46,7 +46,7 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
             myhash_after[key] = max(myhash_before[key])
 
         elif (represent == "count"):
-            myhash_after[key] = len(myhash_before[key])
+            myhash_after[key] = len(set(myhash_before[key]))
     
     mylink.export_hash(myhash_after, delim=delim, key_list=key_list)
 
