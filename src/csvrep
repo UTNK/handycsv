@@ -44,6 +44,9 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
         
         elif (represent == "max"  ):
             myhash_after[key] = max(myhash_before[key])
+
+        elif (represent == "count"):
+            myhash_after[key] = len(myhash_before[key])
     
     mylink.export_hash(myhash_after, delim=delim, key_list=key_list)
 
@@ -66,7 +69,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "-r", "--represent",
-        help="Choose which value to calculate: \'mean\', \'median\', \'mode\', 'sum', or 'random'",
+        help="Choose which value to calculate: \'mean\', \'median\', \'mode\', 'sum', 'count', or 'random'",
         default="mean"
         )
     

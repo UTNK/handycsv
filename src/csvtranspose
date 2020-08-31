@@ -12,9 +12,10 @@ import random
 def csvtranspose(inputfile, delim="\t"):
 
     table_content=[]
-    with open(inputfile, 'r') as handle:
-        for line in handle:
-            table_content.append(line.split("\n")[0].split(delim))
+    handle = open(inputfile, 'r')
+    for line in handle:
+        table_content.append(line.split("\n")[0].split(delim))
+    handle.close()
     for j in range(len(table_content[0])):
         for i in range(len(table_content)):
             if (i == len(table_content) - 1):
