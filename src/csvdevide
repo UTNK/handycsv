@@ -34,9 +34,13 @@ def csvdecompose(
 
         outhandle = open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'a')
         
+        outhandle.write(line)
+
         outhandle.close()
     
     inhandle.close()
+    for key in key2outhandle.keys():
+        key2outhandle[key].close()
 
 # interface
 if __name__ == "__main__":
