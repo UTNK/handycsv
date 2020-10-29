@@ -30,7 +30,7 @@ def csvdecompose(
     
     for line in inhandle:
         
-        key = line.split()[0].split(delim)[column]
+        key = line.split("\n")[0].split(delim)[column]
 
         if (key not in key2outhandle.keys()):
 
