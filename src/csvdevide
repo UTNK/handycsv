@@ -32,15 +32,11 @@ def csvdecompose(
         
         key = line.split("\n")[0].split(delim)[column]
 
-        if (key not in key2outhandle.keys()):
-
-            key2outhandle[key] = open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'w')
+        outhandle = open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'a')
         
-        key2outhandle[key].write(line)
+        outhandle.close()
     
     inhandle.close()
-    for key in key2outhandle.keys():
-        key2outhandle[key].close()
 
 # interface
 if __name__ == "__main__":
