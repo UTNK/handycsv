@@ -6,13 +6,15 @@ import module.mylink as mylink
 from statistics import mean, median, mode
 import argparse
 import random
+import sys
 ######################
 
 # func
 def csvtranspose(inputfile, delim="\t"):
 
     table_content=[]
-    handle = open(inputfile, 'r')
+    if   inputfile !=None: handle = open(inputfile, 'r')
+    else                 : handle = sys.stdin
     for line in handle:
         table_content.append(line.split("\n")[0].split(delim))
     handle.close()
