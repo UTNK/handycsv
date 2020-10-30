@@ -93,5 +93,5 @@ if __name__ == "__main__":
         inputfile    = args.input      , 
         column       = args.column     , 
         delim        = args.delimitter ,
-        gzip         = args.gzip
+        gzippped     = args.gzip
         )
