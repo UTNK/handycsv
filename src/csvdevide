@@ -7,6 +7,7 @@ from statistics import mean, median, mode
 import argparse
 import random
 import sys
+import gzip
 ######################
 
 # func
@@ -14,6 +15,7 @@ def csvdecompose(
         inputfile, 
         column   , 
         delim    ,
+        gzip     ,
         ):
     
     # prep
@@ -32,11 +34,14 @@ def csvdecompose(
         
         key = line.split("\n")[0].split(delim)[column]
 
-        outhandle = open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'a')
-        
-        outhandle.write(line)
+        if (key not in key2outhandle.keys()):
 
-        outhandle.close()
+            if (gzip):
+                key2outhandle[key] = gzip.open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1], "gz"]), 'wt')   
+            else: 
+                key2outhandle[key] = open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'w')
+        
+        key2outhandle[key].write(line)
     
     inhandle.close()
     for key in key2outhandle.keys():
@@ -72,12 +77,21 @@ if __name__ == "__main__":
         default="\t"
     )
 
+    parser.add_argument(
+        "-g", "--gzip",
+        help="Gzip output files",
+        action='store_true',
+        default=False
+    )
+
+
     # parse arguments
     args = parser.parse_args()
 
     # execute main_function()
     csvdecompose( 
-        inputfile    = args.input                    , 
-        column       = args.column, 
-        delim        = args.delimitter               ,
+        inputfile    = args.input      , 
+        column       = args.column     , 
+        delim        = args.delimitter ,
+        gzip         = args.gzip
         )
