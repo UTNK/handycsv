@@ -52,6 +52,9 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
         
         elif (represent == "max"  ):
             myhash_after[key] = max(myhash_before[key])
+        
+        elif (represent == "min"  ):
+            myhash_after[key] = min(myhash_before[key])
 
         elif (represent == "count"):
             myhash_after[key] = len(set(myhash_before[key]))
@@ -77,7 +80,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "-r", "--represent",
-        help="Choose which value to calculate: \'mean\', \'median\', \'mode\', 'sum', 'count', or 'random'",
+        help="Choose which value to calculate: \'mean\', \'median\', \'mode\', 'sum', 'max', 'min', 'count', or 'random'",
         default="mean"
         )
     
