@@ -6,6 +6,7 @@ import module.mylink as mylink
 from statistics import mean, median, mode
 import argparse
 import random
+import sys
 ######################
 
 # func
@@ -16,11 +17,18 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
     key_column   -= 1
     value_column -= 1
 
+    # read file
+    if (inputfile == None):
+        inhandle = sys.stdin
+        inputfile = "stdin.txt"
+    else:
+        inhandle = open(inputfile,'r')
+
     if (represent == "random" or represent == "count" ):
-        myhash_before, key_list = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="str", out_key=True)
+        myhash_before, key_list = mylink.make_hash3(inhandle, key_column, value_column, delim=delim, value_type="str", out_key=True)
     
     else:
-        myhash_before, key_list = mylink.make_hash3(inputfile, key_column, value_column, delim=delim, value_type="float", out_key=True)
+        myhash_before, key_list = mylink.make_hash3(inhandle, key_column, value_column, delim=delim, value_type="float", out_key=True)
     
     myhash_after  = {}
     

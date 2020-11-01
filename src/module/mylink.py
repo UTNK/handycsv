@@ -59,8 +59,10 @@ def make_hash3(txtfile, key_column, value_column, reverse=False,delim="\t",value
 
     if (txtfile == None):
         handle = sys.stdin
-    else:
+    elif (type(txtfile) == str):
         handle = open(txtfile, 'r')
+    else:
+        handle = txtfile
 
     if (True):
         for line in handle:
