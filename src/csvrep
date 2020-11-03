@@ -10,7 +10,15 @@ import sys
 ######################
 
 # func
-def csvrep(inputfile, represent, key_column, value_column, delim,seed):
+def csvrep(
+    inputfile, 
+    represent, 
+    key_column, 
+    value_column, 
+    delim,
+    seed,
+    wholeline
+    ):
 
     random.seed(seed)
 
@@ -25,10 +33,10 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
         inhandle = open(inputfile,'r')
 
     if (represent == "random" or represent == "count" ):
-        myhash_before, key_list = mylink.make_hash3(inhandle, key_column, value_column, delim=delim, value_type="str", out_key=True)
+        myhash_before, key_list, keyvalue2wholeline = mylink.make_hash3(inhandle, key_column, value_column, delim=delim, value_type="str", out_key=True, wholeline = wholeline)
     
     else:
-        myhash_before, key_list = mylink.make_hash3(inhandle, key_column, value_column, delim=delim, value_type="float", out_key=True)
+        myhash_before, key_list, keyvalue2wholeline = mylink.make_hash3(inhandle, key_column, value_column, delim=delim, value_type="float", out_key=True, wholeline = wholeline)
     
     myhash_after  = {}
     
@@ -59,7 +67,12 @@ def csvrep(inputfile, represent, key_column, value_column, delim,seed):
         elif (represent == "count"):
             myhash_after[key] = len(set(myhash_before[key]))
     
-    mylink.export_hash(myhash_after, delim=delim, key_list=key_list)
+    if wholeline:
+        for key in key_list:
+            value = myhash_after[key]
+            print(keyvalue2wholeline[str(key)+"_"+str(value)])
+    else:
+        mylink.export_hash(myhash_after, delim=delim, key_list=key_list)
 
 # interface
 if __name__ == "__main__":
@@ -102,6 +115,13 @@ if __name__ == "__main__":
         default=0
         )
     
+    parser.add_argument(
+        "--wl", "--wholeline",
+        help="Print whole represented lines",
+        action='store_true',
+        default=False
+        )
+    
     # parse arguments
     args = parser.parse_args()
 
@@ -111,5 +131,6 @@ if __name__ == "__main__":
             key_column   = int(args.column.split(",")[0]), 
             value_column = int(args.column.split(",")[1]), 
             delim        = args.delimitter               ,
-            seed         = args.seed
+            seed         = args.seed                     ,
+            wholeline    = args.wl
             )
