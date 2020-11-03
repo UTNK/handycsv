@@ -70,7 +70,7 @@ def csvrep(
     if wholeline:
         for key in key_list:
             value = myhash_after[key]
-            print(keyvalue2wholeline[str(key)+"_"+str(value)])
+            print(keyvalue2wholeline[str(key)+"_"+str(value)],end='')
     else:
         mylink.export_hash(myhash_after, delim=delim, key_list=key_list)
 
