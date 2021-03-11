@@ -26,7 +26,7 @@ def csvclustering(
     if   inputfile !=None: handle = open(inputfile, 'r')
     else                 : handle = sys.stdin
 
-    df = pd.read_table(handle, delimiter = delim, header = 0, index_col = 0) # Notice: Header and index names are required
+    df = pd.read_csv(inputfile, delimiter = delim, header = 0, index_col = 0) # Notice: Header and index names are required
 
     clustering_result = linkage(df, metric = metric, method = method)
 
@@ -39,7 +39,7 @@ def csvclustering(
 
     clusters = fcluster(clustering_result, t=Ncluster, criterion='maxclust')
     for i, c in enumerate(clusters):
-        print(i, c)
+        print(df.index[i], c)
 
     
 
@@ -61,8 +61,8 @@ if __name__ == "__main__":
         )
 
     parser.add_argument(
-        "-d", "--delimitter",
-        help="Specify the delimitter",
+        "-d", "--delimiter",
+        help="Specify the delimiter",
         default="\t"
         )
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
         inputfile = args.input, 
         metric    = args.metric, 
         method    = args.method, 
-        delim     = "\t", 
+        delim     = args.delimiter, 
         show_dendrogram=args.dend,
         Ncluster  = args.ncluster
         )
