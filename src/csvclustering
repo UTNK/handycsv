@@ -1,0 +1,108 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+### Import modules ###
+import module.mylink as mylink
+from statistics import mean, median, mode
+import argparse
+import random
+import sys
+import pandas as pd
+from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
+from matplotlib import pyplot as plt
+######################
+
+# func
+def csvclustering(
+    inputfile, 
+    metric, 
+    method, 
+    delim="\t", 
+    show_dendrogram=False,
+    Ncluster=1
+    ):
+
+    table_content=[]
+    if   inputfile !=None: handle = open(inputfile, 'r')
+    else                 : handle = sys.stdin
+
+    df = pd.read_table(handle, delimiter = delim, header = 0, index_col = 0) # Notice: Header and index names are required
+
+    clustering_result = linkage(df, metric = metric, method = method)
+
+    if (show_dendrogram):
+
+        dendrogram(clustering_result)
+        plt.title("Dedrogram")
+        plt.ylabel("Threshold")
+        plt.savefig("Dendrogram.pdf", bbox_inches = 'tight')
+
+    clusters = fcluster(clustering_result, t=Ncluster, criterion='maxclust')
+    for i, c in enumerate(clusters):
+        print(i, c)
+
+    
+
+# interface
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='csvclustering', add_help=True)
+    
+    parser.add_argument(
+        "-v", "--version",
+        help="Print csvclustering version",
+        action='store_true',
+        default=False
+        )
+
+    parser.add_argument(
+        "-i", "--input",
+        help="Input file path",
+        default=None
+        )
+
+    parser.add_argument(
+        "-d", "--delimitter",
+        help="Specify the delimitter",
+        default="\t"
+        )
+
+    parser.add_argument(
+        "--method",
+        help="Method of hierarchical clustering",
+        default="average"
+        )
+    
+    parser.add_argument(
+        "--metric",
+        help="Metric of hierarchical clustering",
+        default="euclidean"
+        )
+
+    parser.add_argument(
+        "--dend",
+        help="Show dendrogram",
+        action='store_true',
+        default=False
+        )
+    
+    parser.add_argument(
+        "--ncluster",
+        help="Number of clusters",
+        type = int,
+        default=1
+        )
+    
+
+    
+    # parse arguments
+    args = parser.parse_args()
+
+    # execute main_function()
+    csvclustering(
+        inputfile = args.input, 
+        metric    = args.metric, 
+        method    = args.method, 
+        delim     = "\t", 
+        show_dendrogram=args.dend,
+        Ncluster  = args.ncluster
+        )
