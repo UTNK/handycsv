@@ -8,6 +8,7 @@ import argparse
 import random
 import sys
 import gzip
+import os
 ######################
 
 # func
@@ -29,6 +30,8 @@ def csvdecompose(
         inhandle = open(inputfile,'r')
 
     key2outhandle = {}
+
+    os.mkdir(inputfile+".split")
     
     for line in inhandle:
         
@@ -37,9 +40,9 @@ def csvdecompose(
         if (key not in key2outhandle.keys()):
 
             if (gzipped):
-                key2outhandle[key] = gzip.open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1], "gz"]), 'wt')   
+                key2outhandle[key] = gzip.open(inputfile+".split/" + ".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1], "gz"]), 'wt')   
             else: 
-                key2outhandle[key] = open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'w')
+                key2outhandle[key] = open(inputfile+".split/" + ".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'w')
         
         key2outhandle[key].write(line)
     
