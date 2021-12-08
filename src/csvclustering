@@ -26,7 +26,7 @@ def csvclustering(
     if   inputfile !=None: handle = open(inputfile, 'r')
     else                 : handle = sys.stdin
 
-    df = pd.read_csv(inputfile, delimiter = delim, header = 0, index_col = 0) # Notice: Header and index names are required
+    df = pd.read_csv(handle, delimiter = delim, header = 0, index_col = 0) # Notice: Header and index names are required
 
     clustering_result = linkage(df, metric = metric, method = method)
 
@@ -38,8 +38,9 @@ def csvclustering(
         plt.savefig("Dendrogram.pdf", bbox_inches = 'tight')
 
     clusters = fcluster(clustering_result, t=Ncluster, criterion='maxclust')
+    print("element","cluster",sep=delim)
     for i, c in enumerate(clusters):
-        print(df.index[i], c)
+        print(df.index[i], c,sep=delim)
 
     
 
