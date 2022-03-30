@@ -35,7 +35,7 @@ def m2sm( args ):
 
 # interface
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='csvonehot', add_help=True)
+    parser = argparse.ArgumentParser(description='csvm2sm', add_help=True)
     
     parser.add_argument(
         "-v", "--version",
