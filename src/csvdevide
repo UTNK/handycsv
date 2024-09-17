@@ -8,7 +8,6 @@ import argparse
 import random
 import sys
 import gzip
-import os
 ######################
 
 # func
@@ -17,7 +16,6 @@ def csvdecompose(
         column   , 
         delim    ,
         gzipped  ,
-        light
         ):
     
     # prep
@@ -30,39 +28,24 @@ def csvdecompose(
     else:
         inhandle = open(inputfile,'r')
 
-    os.mkdir(inputfile+".split")
+    key2outhandle = {}
+    
+    for line in inhandle:
+        
+        key = line.split("\n")[0].split(delim)[column]
 
-    if light:
-
-        for line in inhandle:
-            
-            key = line.split("\n")[0].split(delim)[column]
+        if (key not in key2outhandle.keys()):
 
             if (gzipped):
-                gzip.open(inputfile+".split/" + ".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1], "gz"]), 'at').write(line)
+                key2outhandle[key] = gzip.open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1], "gz"]), 'wt')   
             else: 
-                open(inputfile+".split/" + ".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'a').write(line)
-
-    else:
-
-        key2outhandle = {}
-    
-        for line in inhandle:
-            
-            key = line.split("\n")[0].split(delim)[column]
-
-            if (key not in key2outhandle.keys()):
-
-                if (gzipped):
-                    key2outhandle[key] = gzip.open(inputfile+".split/" + ".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1], "gz"]), 'wt')   
-                else: 
-                    key2outhandle[key] = open(inputfile+".split/" + ".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'w')
-            
-            key2outhandle[key].write(line)
+                key2outhandle[key] = open(".".join(inputfile.split(".")[:-1]+[key, inputfile.split(".")[-1]]), 'w')
         
-        inhandle.close()
-        for key in key2outhandle.keys():
-            key2outhandle[key].close()
+        key2outhandle[key].write(line)
+    
+    inhandle.close()
+    for key in key2outhandle.keys():
+        key2outhandle[key].close()
 
 # interface
 if __name__ == "__main__":
@@ -101,13 +84,6 @@ if __name__ == "__main__":
         default=False
     )
 
-    parser.add_argument(
-        "-l", "--light",
-        help="Open file one by one",
-        action='store_true',
-        default=False
-    )
-
 
     # parse arguments
     args = parser.parse_args()
@@ -117,6 +93,5 @@ if __name__ == "__main__":
         inputfile    = args.input      , 
         column       = args.column     , 
         delim        = args.delimitter ,
-        gzipped      = args.gzip       ,
-        light        = args.light
+        gzipped     = args.gzip
         )
